@@ -1,0 +1,29 @@
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <div *ngFor="let game of games" class="col mb-5">
+        <div class="card h-100">
+          <div *ngIf="game.oferta" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta</div>
+          <img class="card-img-top" [src]="game.img" [alt]="game.nombre" />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder">{{ game.nombre }}</h5>
+              <div class="d-flex justify-content-center small text-warning mb-2">
+                <ng-container *ngFor="let starIndex of [1, 2, 3, 4, 5]">
+                  <div [ngClass]="calculateStarType(starIndex, game)"></div>
+                </ng-container>
+              </div>
+              <span *ngIf="game.oferta" class="text-muted text-decoration-line-through me-1">{{ formatPrice(game.precioOriginal) }}</span>
+              <span>{{ formatPrice(game.precio) }}</span>
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a class="btn btn-outline-dark mt-auto">Agregar al carrito</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
