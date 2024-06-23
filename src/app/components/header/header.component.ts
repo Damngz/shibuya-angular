@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  @Input() title: string = 'Esenciales';
-  @Input() subtitle: string = '¡Echa un vistazo a nuestros juegos más destacados!';
+  @Input() title: string = '';
+  @Input() subtitle: string = '';
 }
