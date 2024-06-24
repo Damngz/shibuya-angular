@@ -10,6 +10,7 @@ import { CooperativeComponent } from './components/cooperative/cooperative.compo
 import { FamiliarComponent } from './components/familiar/familiar.component';
 import { SolitaireComponent } from './components/solitaire/solitaire.component';
 import { StrategyComponent } from './components/strategy/strategy.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +53,10 @@ export const routes: Routes = [
     path: 'estrategia',
     component: StrategyComponent
   },
+  {
+    path: 'carrito',
+    component: CartComponent
+  }
 ];
 
 @NgModule({
