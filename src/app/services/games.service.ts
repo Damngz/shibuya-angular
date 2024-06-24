@@ -265,7 +265,7 @@ export class GameService {
     }
   ];
 
-  constructor() { }
+  constructor() {}
 
   getGames(): Observable<Game[]> {
     return of(this.games);

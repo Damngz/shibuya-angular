@@ -31,14 +31,15 @@
           <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart-count">{{ cartCount }}</span>
         </button>
       </a>
-      <a id="user-icon" [routerLink]="['/perfil']" class="d-none">
+      <a id="user-icon" [routerLink]="['/perfil']" *ngIf="currentUser">
         <button class="btn btn-outline-dark me-2">
           <i class="bi-person-fill"></i>
         </button>
       </a>
-      <a id="login-icon">
-        <button class="btn btn-outline-danger">
-          <i class="bi-person-fill"></i>
+      <a id="login-icon" [routerLink]="['/login']" *ngIf="!currentUser">
+        <button class="btn btn-outline-dark">
+          <i class="bi-box-arrow-right"></i>
+          Iniciar sesión
         </button>
       </a>
     </div>
