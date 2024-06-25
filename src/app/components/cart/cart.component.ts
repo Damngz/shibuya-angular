@@ -5,6 +5,7 @@ import { Game, GameCart } from '../../models/game.model'; // Ajusta la ruta segÃ
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -16,8 +17,9 @@ import { CommonModule } from '@angular/common';
 export class CartComponent implements OnInit {
   cart: GameCart[] = [];
   cartTotal: number = 0;
+  loading: boolean = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
@@ -32,6 +34,17 @@ export class CartComponent implements OnInit {
     this.cartService.removeFromCart(game);
     this.cart = this.cartService.getCart();
     this.calculateCartTotal();
+  }
+
+  pay(): void {
+    this.loading = true;
+
+    setTimeout(() => {
+      this.loading = false;
+      this.cartService.clearCart();
+      this.router.navigate(['/']);
+      alert('Pago procesado con Ã©xito. Gracias por preferirnos.')
+    }, 4000)
   }
 
   formatPrice(price: number): string {
