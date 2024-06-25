@@ -4,6 +4,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+/**
+ * @description
+ * 
+ * Componente para el registro de nuevos usuarios.
+ */
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -20,6 +25,9 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
+  /**
+   * Inicializa el formulario de registro validando cada campo
+   */
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -33,19 +41,24 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Método invocado al enviar el formulario de registro.
+   * Registra al usuario si el formulario es válido, mostrando una alerta y redirigiendo al usuario a la página principal.
+   */
   onSubmit() {
-    console.log(this.registerForm.value)
-    console.log(this.registerForm.valid)
     if (this.registerForm.valid) {
-      this.authService.register(this.registerForm.value)
-      alert('Registro exitoso');
+      this.authService.register(this.registerForm.value);
+      alert('Registro exitoso'); 
       this.router.navigate(['/']);
     } else {
-      // this.registerForm.markAllAsTouched();
+      this.registerForm.markAllAsTouched();
     }
   }
 
+  /**
+   * Validador personalizado para la contraseña.
+   * Verifica que la contraseña contenga al menos una letra minúscula, una letra mayúscula, un dígito y tenga una longitud entre 8 y 20 caracteres.
+   */
   validatePassword(password: string): boolean {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,20}$/;
     return re.test(password);

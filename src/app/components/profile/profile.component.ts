@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
+/**
+ * @description
+ * 
+ * Componente para la gestión del perfil de usuario.
+ */
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -25,6 +30,11 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
+  /**
+   * Inicializa el componente.
+   * Si no hay un usuario autenticado, redirige a la página de inicio de sesión.
+   * Configura el formulario de perfil con datos iniciales del usuario actual.
+   */
   ngOnInit(): void {
     if (!this.currentUser) {
       this.router.navigate(['/login']);
@@ -40,6 +50,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * Alterna entre el modo de edición del perfil.
+   * Habilita o deshabilita la edición del formulario según el estado de 'editing'.
+   */
   toggleEdit(): void {
     this.editing = !this.editing;
     if (this.editing) {
@@ -50,6 +64,12 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * Guarda los cambios realizados en el perfil del usuario.
+   * Si el formulario es válido, actualiza los datos del usuario, guarda en localStorage
+   * y muestra un mensaje de éxito. Luego, desactiva la edición y redirige al perfil.
+   * Si el formulario no es válido, marca todos los campos como tocados para mostrar los errores.
+   */
   saveChanges(): void {
     if (this.profileForm.valid) {
       this.currentUser = { ...this.currentUser, ...this.profileForm.value };
@@ -63,6 +83,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * Cierra la sesión del usuario y redirige a la página de inicio.
+   */
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);

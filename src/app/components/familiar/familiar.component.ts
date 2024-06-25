@@ -4,6 +4,11 @@ import { HeaderComponent } from '../header/header.component';
 import { GamesListComponent } from '../games-list/games-list.component';
 import { FooterComponent } from '../footer/footer.component';
 
+/**
+ * @description
+ * 
+ * Componente de la categoría Familiar
+ */
 @Component({
   selector: 'app-familiar',
   standalone: true,

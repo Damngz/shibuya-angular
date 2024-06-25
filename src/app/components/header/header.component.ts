@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
 
+/**
+ * @description
+ * 
+ * Componente del header que se muestra en todas las páginas con juegos
+ */
 @Component({
   selector: 'app-header',
   standalone: true,
