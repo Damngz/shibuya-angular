@@ -1,0 +1,30 @@
+<app-navbar [activePage]="'Cart'"></app-navbar>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div id="cart-container">
+      <div *ngFor="let game of cart">
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img [src]="game.img" class="img-fluid rounded-start" [alt]="game.nombre">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h3 class="card-title">{{ game.nombre }}</h3>
+                <p class="card-text quantity mt-3">Cantidad: {{ game.cantidad }}</p>
+                <p class="card-text quantity">Precio: {{ formatPrice(game.precio) }}</p>
+                <p class="card-text quantity">Total: {{ formatPrice(game.cantidad * game.precio) }}</p>
+                <button class="btn btn-danger mt-4" (click)="removeFromCart(game)">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="cart-total" class="mt-4">
+      Total: {{ formatPrice(cartTotal) }}
+    </div>
+    <button class="btn btn-dark btn-lg my-4" id="pay-button">Pagar</button>
+  </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,84 @@
+<section>
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="col mb-5 d-flex flex-column align-items-center">
+      <div class="m-5">
+        <a [routerLink]="['/']">
+          <img class="img-fluid" src="assets/img/shibuya.png" alt="" />
+        </a>
+      </div>
+      <div class="card w-75">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-5">Registro</h2>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="name" formControlName="nombre" placeholder="José Miguel">
+              <div class="text-danger" *ngIf="registerForm.get('nombre')?.invalid && (registerForm.get('nombre')?.dirty || registerForm.get('nombre')?.touched)">
+                Por favor, ingresa tu nombre.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="lastname" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="lastname" formControlName="apellidos" placeholder="Rojas Pérez">
+              <div class="text-danger" *ngIf="registerForm.get('apellidos')?.invalid && (registerForm.get('apellidos')?.dirty || registerForm.get('apellidos')?.touched)">
+                Por favor, ingresa tus apellidos.
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="phone" formControlName="telefono" placeholder="984948321">
+                <div class="text-danger" *ngIf="registerForm.get('telefono')?.invalid && (registerForm.get('telefono')?.dirty || registerForm.get('telefono')?.touched)">
+                  Por favor, ingresa un teléfono válido.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="city" class="form-label">Ciudad</label>
+                <input type="text" class="form-control" id="city" formControlName="ciudad" placeholder="Osorno">
+                <div class="text-danger" *ngIf="registerForm.get('ciudad')?.invalid && (registerForm.get('ciudad')?.dirty || registerForm.get('ciudad')?.touched)">
+                  Por favor, ingresa una ciudad válida.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="address" formControlName="direccion" placeholder="Av. las condes 183">
+              <div class="text-danger" *ngIf="registerForm.get('direccion')?.invalid && (registerForm.get('direccion')?.dirty || registerForm.get('direccion')?.touched)">
+                Por favor, ingresa una dirección válida.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="ejemplo@gmail.com">
+              <div class="text-danger" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+                Por favor, ingresa un correo electrónico válido.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" formControlName="password" placeholder="************">
+              <div class="text-danger" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+                Por favor, ingresa una contraseña válida.
+              </div>
+              <div id="passwordHelpBlock" class="form-text mt-2">
+                · Tu contraseña debe tener una longitud entre 8 y 20 caracteres.
+              </div>
+              <div id="passwordHelpBlock" class="form-text">
+                · Tu contraseña debe tener una mayúscula.
+              </div>
+              <div id="passwordHelpBlock" class="form-text">
+                · Tu contraseña debe tener números.
+              </div>
+              <div id="passwordHelpBlock" class="form-text">
+                · Tu contraseña debe tener letras.
+              </div>
+            </div>
+            <div class="mt-4">
+              <button class="btn btn-dark" type="submit">Registrarme</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

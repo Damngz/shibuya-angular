@@ -8,6 +8,7 @@ import { Game } from '../models/game.model';
 export class GameService {
   private games = [
     {
+      id: 0,
       nombre: "Catan",
       precio: 22990,
       valoracion: 4.5,
@@ -17,6 +18,7 @@ export class GameService {
       categoria: "familiar"
     },
     {
+      id: 1,
       nombre: "Calabozos y Dragones",
       precio: 23990,
       valoracion: 5,
@@ -27,6 +29,7 @@ export class GameService {
       categoria: "cooperativo"
     },
     {
+      id: 2,
       nombre: "Código Secreto",
       precio: 13990,
       valoracion: 4.5,
@@ -37,6 +40,7 @@ export class GameService {
       categoria: "otros"
     },
     {
+      id: 3,
       nombre: "Dixit",
       precio: 29990,
       valoracion: 4,
@@ -46,6 +50,7 @@ export class GameService {
       categoria: "aventura"
     },
     {
+      id: 4,
       nombre: "Gloomhaven",
       precio: 99990,
       valoracion: 5,
@@ -56,6 +61,7 @@ export class GameService {
       categoria: "cooperativo"
     },
     {
+      id: 5,
       nombre: "3 Ring Circus",
       precio: 31990,
       valoracion: 4,
@@ -65,6 +71,7 @@ export class GameService {
       categoria: "solitario"
     },
     {
+      id: 6,
       nombre: "7 Wonders",
       precio: 41990,
       valoracion: 4.5,
@@ -75,6 +82,7 @@ export class GameService {
       categoria: "estrategia"
     },
     {
+      id: 7,
       nombre: "Nemesis",
       precio: 149990,
       valoracion: 5,
@@ -84,6 +92,7 @@ export class GameService {
       categoria: "estrategia"
     },
     {
+      id: 8,
       nombre: "5 Minutes Dungeon",
       precio: 14990,
       valoracion: 4.5,
@@ -93,6 +102,7 @@ export class GameService {
       categoria: "cooperativo"
     },
     {
+      id: 9,
       nombre: "Alice Ha Desaparecido",
       precio: 22990,
       valoracion: 5,
@@ -102,6 +112,7 @@ export class GameService {
       categoria: "cooperativo"
     },
     {
+      id: 10,
       nombre: "Andor",
       precio: 19990,
       valoracion: 4,
@@ -111,6 +122,7 @@ export class GameService {
       categoria: "aventura"
     },
     {
+      id: 11,
       nombre: "Arkham Horror",
       precio: 43490,
       valoracion: 5,
@@ -120,6 +132,7 @@ export class GameService {
       categoria: "aventura"
     },
     {
+      id: 12,
       nombre: "Celestia",
       precio: 30990,
       valoracion: 3.5,
@@ -129,6 +142,7 @@ export class GameService {
       categoria: "aventura"
     },
     {
+      id: 13,
       nombre: "Clank! - Catacumbas",
       precio: 32290,
       valoracion: 4,
@@ -138,6 +152,7 @@ export class GameService {
       categoria: "aventura"
     },
     {
+      id: 14,
       nombre: "Abyss",
       precio: 40240,
       valoracion: 4.5,
@@ -147,6 +162,7 @@ export class GameService {
       categoria: "estrategia"
     },
     {
+      id: 15,
       nombre: "¡Resistid!",
       precio: 21990,
       valoracion: 4,
@@ -157,6 +173,7 @@ export class GameService {
       categoria: "estrategia"
     },
     {
+      id: 16,
       nombre: "Carnegie",
       precio: 57990,
       valoracion: 5,
@@ -167,6 +184,7 @@ export class GameService {
       categoria: "solitario"
     },
     {
+      id: 17,
       nombre: "Caverna",
       precio: 22390,
       valoracion: 4,
@@ -176,6 +194,7 @@ export class GameService {
       categoria: "solitario"
     },
     {
+      id: 18,
       nombre: "Imperium: Legendarios",
       precio: 25290,
       valoracion: 3.5,
@@ -185,6 +204,7 @@ export class GameService {
       categoria: "solitario"
     },
     {
+      id: 19,
       nombre: "Bamboo",
       precio: 23290,
       valoracion: 5,
@@ -194,6 +214,7 @@ export class GameService {
       categoria: "familiar"
     },
     {
+      id: 20,
       nombre: "Catan: Navegantes",
       precio: 34490,
       valoracion: 5,
@@ -203,6 +224,7 @@ export class GameService {
       categoria: "familiar"
     },
     {
+      id: 21,
       nombre: "Century",
       precio: 34490,
       valoracion: 5,
@@ -212,6 +234,7 @@ export class GameService {
       categoria: "familiar"
     },
     {
+      id: 22,
       nombre: "Carcassonne",
       precio: 29990,
       valoracion: 4.5,
@@ -221,6 +244,7 @@ export class GameService {
       categoria: "otros"
     },
     {
+      id: 23,
       nombre: "Bienvenido a la Mazmorra",
       precio: 13990,
       valoracion: 4,
@@ -230,6 +254,7 @@ export class GameService {
       categoria: "otros"
     },
     {
+      id: 24,
       nombre: "Ishtar: Jardines de Babilonia",
       precio: 23390,
       valoracion: 5,
@@ -240,7 +265,7 @@ export class GameService {
     }
   ];
 
-  constructor() { }
+  constructor() {}
 
   getGames(): Observable<Game[]> {
     return of(this.games);
