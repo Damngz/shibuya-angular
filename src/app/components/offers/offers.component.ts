@@ -11,6 +11,4 @@ import { GamesListComponent } from '../games-list/games-list.component';
   templateUrl: './offers.component.html',
   styleUrl: './offers.component.css'
 })
-export class OffersComponent {
-
-}
+export class OffersComponent {}

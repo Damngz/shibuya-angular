@@ -1,62 +1,53 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
-  newUser = {
-    nombre: '',
-    apellidos: '',
-    telefono: '',
-    ciudad: '',
-    direccion: '',
-    email: '',
-    password: '',
-    rol: 'user'
-  };
+export class RegisterComponent implements OnInit {
+  registerForm!: FormGroup;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private formBuilder: FormBuilder
+  ) {}
 
-  onSubmit(form: any) {
-    if (form.valid && this.customValidation()) {
-      this.authService.register(this.newUser)
+  ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      ciudad: ['', Validators.required],
+      direccion: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), this.validatePassword]],
+      rol: ['user']
+    });
+  }
+
+
+  onSubmit() {
+    console.log(this.registerForm.value)
+    console.log(this.registerForm.valid)
+    if (this.registerForm.valid) {
+      this.authService.register(this.registerForm.value)
       alert('Registro exitoso');
       this.router.navigate(['/']);
     } else {
-      form.form.markAllAsTouched();
+      // this.registerForm.markAllAsTouched();
     }
-  }
-
-  customValidation(): boolean {
-    let isValid = true;
-
-    if (!this.validatePhone(this.newUser.telefono)) {
-      isValid = false;
-    }
-
-    if (!this.validatePassword(this.newUser.password)) {
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
-  validatePhone(phone: string): boolean {
-    const re = /^\d{9}$/;
-    return re.test(phone);
   }
 
   validatePassword(password: string): boolean {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,20}$/;
     return re.test(password);
   }
-
 }
