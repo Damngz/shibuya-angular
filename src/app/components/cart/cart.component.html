@@ -24,7 +24,13 @@
     <div id="cart-total" class="mt-4">
       Total: {{ formatPrice(cartTotal) }}
     </div>
-    <button class="btn btn-dark btn-lg my-4" id="pay-button">Pagar</button>
+    <button class="btn btn-dark btn-lg my-4" id="pay-button" (click)="pay()" [disabled]="loading">
+      <span *ngIf="!loading" aria-hidden="true">Pagar</span>
+      <span *ngIf="loading">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Procesando pago...
+      </span>
+    </button>
   </div>
 </section>
 <app-footer></app-footer>
