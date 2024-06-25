@@ -9,16 +9,23 @@
       <div class="card w-75">
         <div class="card-body">
           <h2 class="card-title text-center mb-5">Inicio de sesión</h2>
-          <form (ngSubmit)="login()" class="needs-validation" novalidate>
+          <form [formGroup]="loginForm" (ngSubmit)="login()" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="ejemplo@gmail.com" name="email" [(ngModel)]="email">
+              <input type="email" formControlName="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="ejemplo@gmail.com">
+              <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+                <small *ngIf="loginForm.get('email')?.errors?.['required']">El correo electrónico es requerido.</small>
+                <small *ngIf="loginForm.get('email')?.errors?.['email']">Debe ser un correo electrónico válido.</small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="loginPass" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="loginPass" placeholder="************" name="password" [(ngModel)]="password">
+              <input type="password" formControlName="password" class="form-control" id="loginPass" placeholder="************">
+              <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+                <small *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida.</small>
+              </div>
             </div>
-            <button type="submit" class="btn btn-dark" [disabled]="loading">
+            <button type="submit" class="btn btn-dark" [disabled]="loading || loginForm.invalid">
               <span *ngIf="!loading" aria-hidden="true">Ingresar</span>
               <span *ngIf="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

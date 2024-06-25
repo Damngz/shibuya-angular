@@ -5,37 +5,57 @@
       <div class="card w-75">
         <div class="card-body">
           <h2 class="card-title text-center mb-5">Perfil de usuario</h2>
-          <div class="mb-3">
-            <label for="user-name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="user-name" [(ngModel)]="currentUser.nombre" [disabled]="!editing">
-          </div>
-          <div class="mb-3">
-            <label for="user-lastname" class="form-label">Apellidos</label>
-            <input type="text" class="form-control" id="user-lastname" [(ngModel)]="currentUser.apellidos" [disabled]="!editing">
-          </div>
-          <div class="mb-3">
-            <label for="user-phone" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="user-phone" [(ngModel)]="currentUser.telefono" [disabled]="!editing">
-          </div>
-          <div class="mb-3">
-            <label for="user-city" class="form-label">Ciudad</label>
-            <input type="text" class="form-control" id="user-city" [(ngModel)]="currentUser.ciudad" [disabled]="!editing">
-          </div>
-          <div class="mb-3">
-            <label for="user-address" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="user-address" [(ngModel)]="currentUser.direccion" [disabled]="!editing">
-          </div>
-          <div class="mb-3">
-            <label for="user-email" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" id="user-email" [(ngModel)]="currentUser.email" [disabled]="!editing">
-          </div>
-          <div class="text-center d-flex flex-row justify-content-between mt-5">
-            <button class="btn btn-dark btn-lg" (click)="toggleEdit()">
-              {{ editing ? 'Cancelar' : 'Editar perfil' }}
-            </button>
-            <button class="btn btn-dark btn-lg" *ngIf="editing" (click)="saveChanges()">Guardar cambios</button>
-            <button class="btn btn-danger btn-lg" (click)="logout()">Cerrar sesión</button>
-          </div>
+          <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+            <div class="mb-3">
+              <label for="user-name" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="user-name" formControlName="nombre">
+              <div class="text-danger" *ngIf="profileForm.get('nombre')?.invalid && (profileForm.get('nombre')?.dirty || profileForm.get('nombre')?.touched)">
+                Por favor, ingresa tu nombre.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="user-lastname" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="user-lastname" formControlName="apellidos">
+              <div class="text-danger" *ngIf="profileForm.get('apellidos')?.invalid && (profileForm.get('apellidos')?.dirty || profileForm.get('apellidos')?.touched)">
+                Por favor, ingresa tus apellidos.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="user-phone" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="user-phone" formControlName="telefono">
+              <div class="text-danger" *ngIf="profileForm.get('telefono')?.invalid && (profileForm.get('telefono')?.dirty || profileForm.get('telefono')?.touched)">
+                Por favor, ingresa un teléfono válido.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="user-city" class="form-label">Ciudad</label>
+              <input type="text" class="form-control" id="user-city" formControlName="ciudad">
+              <div class="text-danger" *ngIf="profileForm.get('ciudad')?.invalid && (profileForm.get('ciudad')?.dirty || profileForm.get('ciudad')?.touched)">
+                Por favor, ingresa una ciudad válida.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="user-address" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="user-address" formControlName="direccion">
+              <div class="text-danger" *ngIf="profileForm.get('direccion')?.invalid && (profileForm.get('direccion')?.dirty || profileForm.get('direccion')?.touched)">
+                Por favor, ingresa una dirección válida.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="user-email" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="user-email" formControlName="email">
+              <div class="text-danger" *ngIf="profileForm.get('email')?.invalid && (profileForm.get('email')?.dirty || profileForm.get('email')?.touched)">
+                Por favor, ingresa un correo electrónico válido.
+              </div>
+            </div>
+            <div class="text-center d-flex flex-row justify-content-between mt-5">
+              <button class="btn btn-dark btn-lg" type="button" (click)="toggleEdit()">
+                {{ editing ? 'Cancelar' : 'Editar perfil' }}
+              </button>
+              <button class="btn btn-dark btn-lg" *ngIf="editing" type="submit">Guardar cambios</button>
+              <button class="btn btn-danger btn-lg" type="button" (click)="logout()">Cerrar sesión</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

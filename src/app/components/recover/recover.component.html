@@ -2,20 +2,22 @@
   <div class="container px-4 px-lg-5 mt-5">
     <div class="col mb-5 d-flex flex-column align-items-center">
       <div class="m-5">
-        <a href="index.html">
+        <a [routerLink]="['/']">
           <img class="img-fluid" src="assets/img/shibuya.png" alt="" />
         </a>
       </div>
       <div class="card w-75">
         <div class="card-body">
           <h2 class="card-title text-center mb-5">Recuperar contraseña</h2>
-          
-          <!-- Mostrar formulario o mensaje de éxito -->
+
           <ng-container *ngIf="!emailSent; else emailSentMessage">
-            <form id="recovery-form" (ngSubmit)="sendRecoveryEmail()">
+            <form [formGroup]="recoveryForm" (ngSubmit)="sendRecoveryEmail()">
               <div class="mb-3">
                 <label for="inputEmail" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="ejemplo@gmail.com" name="email" [(ngModel)]="email">
+                <input type="email" class="form-control" id="inputEmail" formControlName="email" placeholder="ejemplo@gmail.com">
+                <div class="text-danger" *ngIf="recoveryForm.get('email')?.invalid && (recoveryForm.get('email')?.dirty || recoveryForm.get('email')?.touched)">
+                  Por favor, ingresa un correo electrónico válido.
+                </div>
               </div>
               <button type="submit" class="mt-2 btn btn-dark" [disabled]="loading">
                 <span *ngIf="!loading" aria-hidden="true">Enviar</span>
