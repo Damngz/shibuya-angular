@@ -10,6 +10,11 @@ import { CooperativeComponent } from './components/cooperative/cooperative.compo
 import { FamiliarComponent } from './components/familiar/familiar.component';
 import { SolitaireComponent } from './components/solitaire/solitaire.component';
 import { StrategyComponent } from './components/strategy/strategy.component';
+import { CartComponent } from './components/cart/cart.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { RecoverComponent } from './components/recover/recover.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +57,26 @@ export const routes: Routes = [
     path: 'estrategia',
     component: StrategyComponent
   },
+  {
+    path: 'carrito',
+    component: CartComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'registro',
+    component: RegisterComponent
+  },
+  {
+    path: 'recuperar',
+    component: RecoverComponent
+  },
+  {
+    path: 'perfil',
+    component: ProfileComponent
+  }
 ];
 
 @NgModule({

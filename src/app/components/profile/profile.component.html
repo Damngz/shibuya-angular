@@ -1,0 +1,44 @@
+<app-navbar [activePage]="'Perfil'"></app-navbar>
+<section class="mb-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="card w-75">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-5">Perfil de usuario</h2>
+          <div class="mb-3">
+            <label for="user-name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="user-name" [(ngModel)]="currentUser.nombre" [disabled]="!editing">
+          </div>
+          <div class="mb-3">
+            <label for="user-lastname" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="user-lastname" [(ngModel)]="currentUser.apellidos" [disabled]="!editing">
+          </div>
+          <div class="mb-3">
+            <label for="user-phone" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="user-phone" [(ngModel)]="currentUser.telefono" [disabled]="!editing">
+          </div>
+          <div class="mb-3">
+            <label for="user-city" class="form-label">Ciudad</label>
+            <input type="text" class="form-control" id="user-city" [(ngModel)]="currentUser.ciudad" [disabled]="!editing">
+          </div>
+          <div class="mb-3">
+            <label for="user-address" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="user-address" [(ngModel)]="currentUser.direccion" [disabled]="!editing">
+          </div>
+          <div class="mb-3">
+            <label for="user-email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="user-email" [(ngModel)]="currentUser.email" [disabled]="!editing">
+          </div>
+          <div class="text-center d-flex flex-row justify-content-between mt-5">
+            <button class="btn btn-dark btn-lg" (click)="toggleEdit()">
+              {{ editing ? 'Cancelar' : 'Editar perfil' }}
+            </button>
+            <button class="btn btn-dark btn-lg" *ngIf="editing" (click)="saveChanges()">Guardar cambios</button>
+            <button class="btn btn-danger btn-lg" (click)="logout()">Cerrar sesión</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

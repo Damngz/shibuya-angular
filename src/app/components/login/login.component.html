@@ -1,0 +1,35 @@
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="col mb-5 d-flex flex-column align-items-center">
+      <div class="m-5">
+        <a [routerLink]="['/']">
+          <img class="img-fluid" src="assets/img/shibuya.png" alt="" />
+        </a>
+      </div>
+      <div class="card w-75">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-5">Inicio de sesión</h2>
+          <form (ngSubmit)="login()" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="ejemplo@gmail.com" name="email" [(ngModel)]="email">
+            </div>
+            <div class="mb-3">
+              <label for="loginPass" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="loginPass" placeholder="************" name="password" [(ngModel)]="password">
+            </div>
+            <button type="submit" class="btn btn-dark" [disabled]="loading">
+              <span *ngIf="!loading" aria-hidden="true">Ingresar</span>
+              <span *ngIf="loading">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Ingresando...
+              </span>
+            </button>
+          </form>
+          <p class="card-text mt-4">¿Aún no estás registrado? <a class="link-dark" [routerLink]="['/registro']">Regístrate aquí</a></p>
+          <a class="card-link link-dark" [routerLink]="['/recuperar']">Recuperar contraseña</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/games.service';
 import { Game } from '../../models/game.model';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-games-list',
@@ -14,7 +15,7 @@ export class GamesListComponent implements OnInit {
   @Input() category: string = '';
   games: Game[] = [];
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.gameService.getGames().subscribe(games => {
@@ -44,5 +45,9 @@ export class GamesListComponent implements OnInit {
     if (!price) return `$0`;
     
     return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+  }
+
+  addToCart(game: Game): void {
+    this.cartService.addToCart(game);
   }
 }
