@@ -4,6 +4,11 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { GamesListComponent } from '../games-list/games-list.component';
 
+/**
+ * @description
+ * 
+ * Componente que muestra las ofertas de la tienda
+ */
 @Component({
   selector: 'app-offers',
   standalone: true,
