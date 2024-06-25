@@ -267,10 +267,19 @@ export class GameService {
 
   constructor() {}
 
+  /**
+   * Obtiene todos los juegos disponibles.
+   * @returns Un observable que emite un array de objetos Game.
+   */
   getGames(): Observable<Game[]> {
     return of(this.games);
   }
 
+  /**
+   * Obtiene juegos filtrados por una categoría específica.
+   * @param category Categoría por la cual se van a filtrar los juegos.
+   * @returns Un observable que emite un array de objetos Game que pertenecen a la categoría especificada.
+   */
   getGamesByCategory(category: string): Observable<Game[]> {
     return of(this.games.filter(game => game.categoria === category));
   }
