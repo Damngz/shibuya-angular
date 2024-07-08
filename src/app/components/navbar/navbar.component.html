@@ -23,6 +23,9 @@
             <li><a class="dropdown-item" [routerLink]="['/juegos']">Todos los juegos</a></li>
           </ul>
         </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" [class.active]="activePage === 'Modificar'" [routerLink]="['/modificar-juegos']">Modificar Juegos</a>
+        </li>
       </ul>
       <a [routerLink]="['/carrito']">
         <button class="btn btn-outline-dark me-2">
