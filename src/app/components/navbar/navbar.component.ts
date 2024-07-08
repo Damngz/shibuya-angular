@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @description
- * 
  * Componente de la barra de navegación.
  */
 @Component({
@@ -42,5 +41,9 @@ export class NavbarComponent implements OnInit {
       this.cartCount = count;
     });
     this.currentUser = this.authService.getCurrentUser();
+  }
+
+  isAdmin(): boolean {
+    return this.currentUser && this.currentUser.rol === 'admin';
   }
 }
