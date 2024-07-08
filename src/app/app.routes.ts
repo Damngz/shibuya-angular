@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RecoverComponent } from './components/recover/recover.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ModifyGamesComponent } from './components/modify_games/modify_games.component';
 
 export const routes: Routes = [
   {
@@ -76,6 +77,10 @@ export const routes: Routes = [
   {
     path: 'perfil',
     component: ProfileComponent
+  },
+  {
+    path: 'modificar-juegos',
+    component: ModifyGamesComponent
   }
 ];
 
