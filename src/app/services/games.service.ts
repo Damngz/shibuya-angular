@@ -10,12 +10,12 @@ export class GameService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
-      'Authorization': 'Bearer 011e9970-0892-41ff-8067-e29f447fc7da',
+      'Authorization': 'Bearer c7f1f9ca-caed-49fb-b31c-d6e06dfbe212',
       'Access-Control-Allow-Origin': 'http://localhost:4200'
     })
   }
 
-  private gamesUrl = 'https://firebasestorage.googleapis.com/v0/b/shibuya-654cf.appspot.com/o/games.json?alt=media&token=011e9970-0892-41ff-8067-e29f447fc7da';
+  private gamesUrl = 'https://firebasestorage.googleapis.com/v0/b/shibuya-654cf.appspot.com/o/games.json?alt=media&token=c7f1f9ca-caed-49fb-b31c-d6e06dfbe212';
   
   private games: Game[] = [];
 
