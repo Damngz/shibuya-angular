@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class GameService {
-  private apiUrl = 'http://host.docker.internal:8081/products';
+  private apiUrl = 'http://localhost:8081/products';
 
   constructor(private http: HttpClient) {}
 
