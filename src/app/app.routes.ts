@@ -15,6 +15,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RecoverComponent } from './components/recover/recover.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UsersComponent } from './components/users/users.component';
+import { AdminGuard } from './guards/admin.guard';
+import { AddGameComponent } from './components/add-game/add-game.component';
+import { EditGameComponent } from './components/edit-game/edit-game.component';
 
 export const routes: Routes = [
   {
@@ -76,6 +80,21 @@ export const routes: Routes = [
   {
     path: 'perfil',
     component: ProfileComponent
+  },
+  {
+    path: 'usuarios',
+    component: UsersComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'agregar-juego',
+    component: AddGameComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'editar-juego/:id',
+    component: EditGameComponent,
+    canActivate: [AdminGuard]
   }
 ];
 

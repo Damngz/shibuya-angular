@@ -8,36 +8,36 @@
           <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
             <div class="mb-3">
               <label for="user-name" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="user-name" formControlName="nombre">
-              <div class="text-danger" *ngIf="profileForm.get('nombre')?.invalid && (profileForm.get('nombre')?.dirty || profileForm.get('nombre')?.touched)">
+              <input type="text" class="form-control" id="user-name" formControlName="name">
+              <div class="text-danger" *ngIf="profileForm.get('name')?.invalid && (profileForm.get('name')?.dirty || profileForm.get('name')?.touched)">
                 Por favor, ingresa tu nombre.
               </div>
             </div>
             <div class="mb-3">
               <label for="user-lastname" class="form-label">Apellidos</label>
-              <input type="text" class="form-control" id="user-lastname" formControlName="apellidos">
-              <div class="text-danger" *ngIf="profileForm.get('apellidos')?.invalid && (profileForm.get('apellidos')?.dirty || profileForm.get('apellidos')?.touched)">
+              <input type="text" class="form-control" id="user-lastname" formControlName="last_names">
+              <div class="text-danger" *ngIf="profileForm.get('last_names')?.invalid && (profileForm.get('last_names')?.dirty || profileForm.get('last_names')?.touched)">
                 Por favor, ingresa tus apellidos.
               </div>
             </div>
             <div class="mb-3">
               <label for="user-phone" class="form-label">Teléfono</label>
-              <input type="text" class="form-control" id="user-phone" formControlName="telefono">
-              <div class="text-danger" *ngIf="profileForm.get('telefono')?.invalid && (profileForm.get('telefono')?.dirty || profileForm.get('telefono')?.touched)">
+              <input type="text" class="form-control" id="user-phone" formControlName="phone">
+              <div class="text-danger" *ngIf="profileForm.get('phone')?.invalid && (profileForm.get('phone')?.dirty || profileForm.get('phone')?.touched)">
                 Por favor, ingresa un teléfono válido.
               </div>
             </div>
             <div class="mb-3">
               <label for="user-city" class="form-label">Ciudad</label>
-              <input type="text" class="form-control" id="user-city" formControlName="ciudad">
-              <div class="text-danger" *ngIf="profileForm.get('ciudad')?.invalid && (profileForm.get('ciudad')?.dirty || profileForm.get('ciudad')?.touched)">
+              <input type="text" class="form-control" id="user-city" formControlName="city">
+              <div class="text-danger" *ngIf="profileForm.get('city')?.invalid && (profileForm.get('city')?.dirty || profileForm.get('city')?.touched)">
                 Por favor, ingresa una ciudad válida.
               </div>
             </div>
             <div class="mb-3">
               <label for="user-address" class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="user-address" formControlName="direccion">
-              <div class="text-danger" *ngIf="profileForm.get('direccion')?.invalid && (profileForm.get('direccion')?.dirty || profileForm.get('direccion')?.touched)">
+              <input type="text" class="form-control" id="user-address" formControlName="address">
+              <div class="text-danger" *ngIf="profileForm.get('address')?.invalid && (profileForm.get('address')?.dirty || profileForm.get('address')?.touched)">
                 Por favor, ingresa una dirección válida.
               </div>
             </div>

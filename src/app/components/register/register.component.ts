@@ -22,22 +22,21 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
-      ciudad: ['', Validators.required],
-      direccion: ['', Validators.required],
+      name: ['', Validators.required],
+      last_names: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), this.validatePassword]],
-      rol: ['user']
+      role: ['user']
     });
   }
 
 
   onSubmit() {
-    console.log(this.registerForm.value)
-    console.log(this.registerForm.valid)
     if (this.registerForm.valid) {
+      console.log(this.registerForm.value);
       this.authService.register(this.registerForm.value)
       alert('Registro exitoso');
       this.router.navigate(['/']);

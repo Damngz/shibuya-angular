@@ -1,0 +1,61 @@
+<app-navbar [activePage]="'Categorias'"></app-navbar>
+<app-header title="Agregar juego" subtitle="¡Agrega un juego a la venta!"></app-header>
+<section class="container my-5">
+  <h2 class="text-center mb-4">Agregar Juego</h2>
+  <form [formGroup]="gameForm" (ngSubmit)="addGame()">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre del Juego</label>
+      <input type="text" id="nombre" formControlName="nombre" class="form-control" />
+      <div *ngIf="gameForm.get('nombre')?.touched && gameForm.get('nombre')?.invalid" class="text-danger">
+        El nombre es obligatorio y debe tener al menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="categoria" class="form-label">Categoría</label>
+      <select id="categoria" formControlName="categoria" class="form-select">
+        <option value="aventura">Aventura</option>
+        <option value="cooperativo">Cooperativo</option>
+        <option value="estrategia">Estrategia</option>
+        <option value="solitario">Solitario</option>
+        <option value="familiar">Familiar</option>
+        <option value="otros">Otros</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="precio" class="form-label">Precio</label>
+      <input type="number" id="precio" formControlName="precio" class="form-control" />
+      <div *ngIf="gameForm.get('precio')?.touched && gameForm.get('precio')?.invalid" class="text-danger">
+        El precio es obligatorio y debe ser mayor a 0.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="oferta" class="form-label">Oferta</label>
+      <select id="oferta" formControlName="oferta" class="form-select">
+        <option value="Y">Sí</option>
+        <option value="N">No</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="img" class="form-label">URL de Imagen</label>
+      <input type="text" id="img" formControlName="img" class="form-control" />
+      <div *ngIf="gameForm.get('img')?.touched && gameForm.get('img')?.invalid" class="text-danger">
+        La URL de la imagen es obligatoria.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="esencial" class="form-label">Esencial</label>
+      <select id="esencial" formControlName="esencial" class="form-select">
+        <option value="Y">Sí</option>
+        <option value="N">No</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="gameForm.invalid">Agregar Juego</button>
+  </form>
+</section>
+<app-footer></app-footer>

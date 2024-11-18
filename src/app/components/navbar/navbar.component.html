@@ -23,6 +23,7 @@
             <li><a class="dropdown-item" [routerLink]="['/juegos']">Todos los juegos</a></li>
           </ul>
         </li>
+        <li *ngIf="currentUser && currentUser.role ==='admin'" class="nav-item"><a class="nav-link" [class.active]="activePage === 'Usuarios'" [routerLink]="['/usuarios']">Usuarios</a></li>
       </ul>
       <a [routerLink]="['/carrito']">
         <button class="btn btn-outline-dark me-2">

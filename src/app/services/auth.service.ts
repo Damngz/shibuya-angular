@@ -1,67 +1,60 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private users: User[] = [
-    {
-      "nombre": "José Miguel",
-      "apellidos": "Rojas Pérez",
-      "telefono": "984948321",
-      "ciudad": "Osorno",
-      "direccion": "Av. providencia 9839",
-      "email": "user1@gmail.com",
-      "password": "Password1",
-      "rol": "user"
-    },
-    {
-      "nombre": "María Isabel",
-      "apellidos": "López Sánchez",
-      "telefono": "987654321",
-      "ciudad": "Santiago",
-      "direccion": "Calle San Martín 543",
-      "email": "user2@gmail.com",
-      "password": "Password2",
-      "rol": "user"
-    },
-    {
-      "nombre": "Daniel",
-      "apellidos": "Muñoz",
-      "telefono": "990894243",
-      "ciudad": "Santiago",
-      "direccion": "Calle mi casa 123",
-      "email": "admin@shibuya.com",
-      "password": "adminShibuya2024",
-      "rol": "admin"
-    }
-  ];
+  private apiUrl = 'http://host.docker.internal:8080/users';
+  private currentUser: User | null = null;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): boolean {
-    const user = this.users.find(user => user.email === email && user.password === password);
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      return true;
-    } else {
-      return false;
-    }
+  login(email: string, password: string): Observable<boolean> {
+    const body = { email, password };
+    return this.http.post<{ data: User}>(`${this.apiUrl}/login`, body).pipe(
+      map(response => {
+        const user = response.data;
+        this.currentUser = user;
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        return true;
+      }),
+      catchError(() => {
+        return of(false);
+      })
+    );
   }
 
   logout(): void {
+    this.currentUser = null;
     localStorage.removeItem('currentUser');
   }
 
+  updateProfile(updatedUser: User): Observable<User> {
+    return this.http.put<any>(`${this.apiUrl}/${updatedUser.userId}`, updatedUser).pipe(
+      map(response => {
+        return response.data;
+      })
+    );
+  }  
+
   register(newUser: User) {
-    this.users.push(newUser);
-    this.login(newUser.email, newUser.password);
+    return this.http.post<{ data: User}>(`${this.apiUrl}`, newUser).pipe(
+      map(response => {
+        console.log(response);
+        return response.data;
+      })
+    );
   }
 
   getCurrentUser(): any {
-    const currentUser = localStorage.getItem('currentUser');
-    return currentUser ? JSON.parse(currentUser) : null;
+    if (!this.currentUser) {
+      const storedUser = localStorage.getItem('currentUser');
+      this.currentUser = storedUser ? JSON.parse(storedUser) : null;
+    }
+    return this.currentUser;
   }
 
   isLoggedIn(): boolean {

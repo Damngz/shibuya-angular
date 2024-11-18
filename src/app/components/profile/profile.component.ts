@@ -31,11 +31,11 @@ export class ProfileComponent implements OnInit {
     }
 
     this.profileForm = this.formBuilder.group({
-      nombre: [{ value: this.currentUser.nombre, disabled: !this.editing }, Validators.required],
-      apellidos: [{ value: this.currentUser.apellidos, disabled: !this.editing }, Validators.required],
-      telefono: [{ value: this.currentUser.telefono, disabled: !this.editing }, [Validators.required, Validators.pattern(/^\d{9}$/)]],
-      ciudad: [{ value: this.currentUser.ciudad, disabled: !this.editing }, Validators.required],
-      direccion: [{ value: this.currentUser.direccion, disabled: !this.editing }, Validators.required],
+      name: [{ value: this.currentUser.name, disabled: !this.editing }, Validators.required],
+      last_names: [{ value: this.currentUser.lastNames, disabled: !this.editing }, Validators.required],
+      phone: [{ value: this.currentUser.phone, disabled: !this.editing }, [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      city: [{ value: this.currentUser.city, disabled: !this.editing }, Validators.required],
+      address: [{ value: this.currentUser.address, disabled: !this.editing }, Validators.required],
       email: [{ value: this.currentUser.email, disabled: !this.editing }, [Validators.required, Validators.email]]
     });
   }
@@ -54,10 +54,20 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.valid) {
       this.currentUser = { ...this.currentUser, ...this.profileForm.value };
       localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-      this.editing = false;
-      this.profileForm.disable();
-      alert('Perfil actualizado con éxito');
-      this.router.navigate(['/perfil']);
+
+      this.authService.updateProfile(this.currentUser).subscribe(
+        (updatedUser) => {
+          localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+          this.editing = false;
+          this.profileForm.disable();
+          alert('Perfil actualizado con éxito');
+          this.router.navigate(['/perfil']);
+        },
+        (error) => {
+          console.error('Error updating user:', error);
+          alert('Error al actualizar el perfil');
+        }
+      );
     } else {
       this.profileForm.markAllAsTouched();
     }

@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/games.service';
 import { Game } from '../../models/game.model';
 import { CartService } from '../../services/cart.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-games-list',
@@ -14,17 +16,23 @@ import { CartService } from '../../services/cart.service';
 export class GamesListComponent implements OnInit {
   @Input() category: string = '';
   games: Game[] = [];
+  currentUser = this.authService.getCurrentUser();
 
-  constructor(private gameService: GameService, private cartService: CartService) { }
+  constructor(
+    private gameService: GameService,
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.gameService.getGames().subscribe(games => {
       if (this.category === '') {
         this.games = games;
       } else if (this.category === 'esenciales') {
-        this.games = games.filter(game => game.esencial);
+        this.games = games.filter(game => game.esencial === 'Y');
       } else if (this.category === 'ofertas') {
-        this.games = games.filter(game => game.oferta)
+        this.games = games.filter(game => game.oferta === 'Y')
       } else {
         this.games = games.filter(game => game.categoria === this.category);
       }
@@ -42,7 +50,7 @@ export class GamesListComponent implements OnInit {
   }
 
   formatPrice(price: number | undefined) {
-    if (!price) return `$0`;
+    if (!price) return ;
     
     return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
   }
@@ -50,4 +58,33 @@ export class GamesListComponent implements OnInit {
   addToCart(game: Game): void {
     this.cartService.addToCart(game);
   }
+
+  addGame() {
+    this.router.navigate(['/agregar-juego']);
+  }
+
+  updateGame(id: number | undefined) {
+    this.router.navigate(['/editar-juego/' + id]);
+  }
+
+  loadGames(): void {
+    this.gameService.getGames().subscribe(games => {
+      if (this.category === '') {
+        this.games = games;
+      } else {
+        this.games = games.filter(game => game.categoria === this.category);
+      }
+    });
+  }
+
+  deleteGame(gameId: number | undefined): void {
+    if (!gameId) return;
+    if (confirm('¿Estás seguro de que deseas eliminar este juego?')) {
+      this.gameService.deleteGame(gameId).subscribe(() => {
+        alert('Juego eliminado con éxito');
+        this.loadGames();
+      });
+    }
+  }
+
 }

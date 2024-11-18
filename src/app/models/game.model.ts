@@ -3,11 +3,13 @@ export interface Game {
   nombre: string;
   precio: number;
   valoracion: number;
-  oferta: boolean;
+  oferta: string;
   precioOriginal?: number;
   img: string;
-  esencial: boolean;
+  esencial: string;
   categoria: string;
+  stock: number;
+  productId?: number;
 }
 
 export interface GameCart {
@@ -15,11 +17,13 @@ export interface GameCart {
   nombre: string;
   precio: number;
   valoracion: number;
-  oferta: boolean;
+  oferta: string;
   precioOriginal?: number;
   img: string;
-  esencial: boolean;
+  esencial: string;
   categoria: string;
   cantidad: number;
+  stock: number;
   total: number;
+  productId?: number;
 }
