@@ -25,6 +25,7 @@
                 <small *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida.</small>
               </div>
             </div>
+            <p *ngIf="invalidCredentials" class="text-danger">Credenciales inválidas</p>
             <button type="submit" class="btn btn-dark" [disabled]="loading || loginForm.invalid">
               <span *ngIf="!loading" aria-hidden="true">Ingresar</span>
               <span *ngIf="loading">

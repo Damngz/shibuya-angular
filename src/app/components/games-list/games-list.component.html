@@ -1,10 +1,16 @@
 <!-- Sección de juegos -->
 <section class="py-5">
   <div class="container px-4 px-lg-5 mt-5">
+    <div class="d-flex flex-row justify-content-end w-100">
+      <a *ngIf="currentUser && currentUser.role === 'admin'" class="btn btn-outline-dark mt-auto mb-5" (click)="addGame()">
+        <i class="bi bi-plus"></i>
+        Agregar juego
+      </a>
+    </div>
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
       <div *ngFor="let game of games" class="col mb-5">
         <div class="card h-100">
-          <div *ngIf="game.oferta" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta</div>
+          <div *ngIf="game.oferta === 'Y'" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta</div>
           <img class="card-img-top" [src]="game.img" [alt]="game.nombre" />
           <div class="card-body p-4">
             <div class="text-center">
@@ -18,13 +24,21 @@
               <span>{{ formatPrice(game.precio) }}</span>
             </div>
           </div>
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <div *ngIf="!currentUser || currentUser.role !== 'admin'" class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
               <a *ngIf="!isAdmin()" class="btn btn-outline-dark mt-auto" (click)="addToCart(game)">Agregar al carrito</a>
               <div *ngIf="isAdmin()">
                 <a class="btn btn-outline-dark mt-auto me-2" (click)="openEditModal(game)">Editar</a>
                 <a class="btn btn-outline-dark mt-auto" (click)="deleteGame(game)">Eliminar</a>
               </div>
+            </div>
+          </div>
+          <div *ngIf="currentUser && currentUser.role === 'admin'" class="card-footer d-flex flex-row justify-content-center gap-2 p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a class="btn btn-outline-dark mt-auto" (click)="updateGame(game.productId)">Editar</a>
+            </div>            
+            <div class="text-center">
+              <a class="btn btn-outline-dark mt-auto" (click)="deleteGame(game.productId)">Eliminar</a>
             </div>
           </div>
         </div>

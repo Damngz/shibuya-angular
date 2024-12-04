@@ -22,7 +22,8 @@ export class CartService {
    * @param game Juego que se va a agregar al carrito.
    */
   addToCart(game: Game): void {
-    const existingCartItem = this.cart.find(item => item.id === game.id);
+    console.log(game, this.cart);
+    const existingCartItem = this.cart.find(item => item.id === game.productId);
 
     if (existingCartItem) {
       existingCartItem.cantidad += 1;
@@ -40,7 +41,8 @@ export class CartService {
    * @param game Juego que se va a eliminar del carrito.
    */
   removeFromCart(game: Game): void {
-    this.cart = this.cart.filter(cartItem => cartItem.id !== game.id);
+    console.log(game, this.cart);
+    this.cart = this.cart.filter(cartItem => cartItem.productId !== game.productId);
     this.saveCart();
   }
 

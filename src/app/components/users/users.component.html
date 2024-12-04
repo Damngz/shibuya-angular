@@ -1,0 +1,35 @@
+<app-navbar [activePage]="'Usuarios'"></app-navbar>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="d-flex flex-row justify-content-end w-100">
+      <a *ngIf="currentUser && currentUser.role === 'admin'" class="btn btn-outline-dark mt-auto mb-5">
+        <i class="bi bi-plus"></i>
+        Agregar usuario
+      </a>
+    </div>
+    <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
+      <div *ngFor="let user of users" class="col mb-5">
+        <div class="card h-100">
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder">{{ user.name }} {{ user.lastNames }}</h5>
+              <p class="text-muted">{{ user.email }}</p>
+              <p><strong>Teléfono:</strong> {{ user.phone }}</p>
+              <p><strong>Dirección:</strong> {{ user.address }}, {{ user.city }}</p>
+              <p><strong>Rol:</strong> {{ user.role }}</p>
+            </div>
+          </div>
+          <div *ngIf="currentUser && currentUser.role === 'admin'" class="card-footer d-flex flex-row justify-content-center gap-2 p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a class="btn btn-outline-dark mt-auto" (click)="editUser(user.userId)">Editar</a>
+            </div>
+            <div class="text-center">
+              <a class="btn btn-outline-dark mt-auto" (click)="deleteUser(user.userId)">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
