@@ -20,14 +20,14 @@ export class NavbarComponent implements OnInit {
   @Input() activePage: string = 'Inicio';
   cartCount: number = 0;
   currentUser: User = {
-    nombre: '',
-    apellidos: '',
-    telefono: '',
-    ciudad: '',
-    direccion: '',
+    name: '',
+    lastNames: '',
+    phone: '',
+    city: '',
+    address: '',
     email: '',
     password: '',
-    rol: ''
+    role: ''
   };
 
   constructor(private cartService: CartService, private authService: AuthService) {}

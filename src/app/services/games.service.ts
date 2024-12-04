@@ -1,18 +1,45 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
 import { Game } from '../models/game.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-type': 'application/json',
-      'Authorization': 'Bearer c7f1f9ca-caed-49fb-b31c-d6e06dfbe212',
-      'Access-Control-Allow-Origin': 'http://localhost:4200'
-    })
+  private apiUrl = '/api/products/products';
+
+  constructor(private http: HttpClient) {}
+
+  getGames(): Observable<Game[]> {
+    return this.http.get<{ data: Game[] }>(this.apiUrl).pipe(
+      map(response => response.data)
+    );
+  }
+
+  addGame(game: Game): Observable<Game> {
+    return this.http.post<{ data: Game }>(`${this.apiUrl}`, game).pipe(
+      map(response => {
+        return response.data
+      })
+    );
+  }
+
+  getGameById(id: number): Observable<Game> {
+    return this.http.get<{ data: Game}>(`${this.apiUrl}/${id}`).pipe(
+      map(response => {
+        return response.data;
+      })
+    );;
+  }
+  
+  updateGame(game: Game): Observable<void> {
+    console.log(game);
+    return this.http.put<void>(`${this.apiUrl}/${game.id}`, game);
+  }  
+  
+  deleteGame(gameId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${gameId}`);
   }
 
   private gamesUrl = 'https://firebasestorage.googleapis.com/v0/b/shibuya-654cf.appspot.com/o/games.json?alt=media&token=c7f1f9ca-caed-49fb-b31c-d6e06dfbe212';
@@ -35,7 +62,7 @@ export class GameService {
    * @returns Un observable que emite un array de objetos Game que pertenecen a la categoría especificada.
    */
   getGamesByCategory(category: string): Observable<Game[]> {
-    return of(this.games.filter(game => game.categoria === category));
+    return this.http.get<Game[]>(`${this.apiUrl}/category/${category}`);
   }
 
   deleteGame(gameId: number, games: Game[]): Observable<Game[]> {

@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   loginForm!: FormGroup; // Formulario inicio de sesión
   loading: boolean = false;
+  invalidCredentials: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -48,16 +49,15 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.loading = true;
       const { email, password } = this.loginForm.value;
-      const loggedIn = this.authService.login(email, password);
-
-      if (loggedIn) {
-        this.loading = true;
-  
-        setTimeout(() => {
-          this.loading = false;
+      this.authService.login(email, password).subscribe(value => {
+        if (value) {
+          this.loading = true;
           this.router.navigate(['/']);
-        }, 2000)
-      }
+        } else {
+          this.invalidCredentials = true;
+        }
+        this.loading = false;
+      });
     }
   }
 }
