@@ -6,18 +6,12 @@ import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
-/**
- * @description
- * 
- * Componente para mostrar una lista de juegos filtrados por categoría.
- */
 @Component({
   selector: 'app-games-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule],
   templateUrl: './games-list.component.html',
-  styleUrl: './games-list.component.css',
-  providers: [GameService]
+  styleUrl: './games-list.component.css'
 })
 export class GamesListComponent implements OnInit {
   @Input() category: string = '';
@@ -31,15 +25,7 @@ export class GamesListComponent implements OnInit {
     private router: Router
   ) {}
 
-  /**
-   * Inicializa el componente obteniendo los juegos del servicio `GameService`
-   * y filtrándolos según la categoría especificada.
-   */
   ngOnInit(): void {
-    this.loadGames();
-  }
-
-  loadGames(): void {
     this.gameService.getGames().subscribe(games => {
       if (this.category === '') {
         this.games = games;
@@ -53,12 +39,6 @@ export class GamesListComponent implements OnInit {
     });
   }
 
-  /**
-   * Calcula el tipo de estrella (llena, mitad o vacía) según la valoración del juego.
-   * @param starIndex Índice de la estrella actual.
-   * @param game Juego del cual se calcula la valoración.
-   * @returns Nombre de la clase de Bootstrap Icons para la estrella correspondiente.
-   */
   calculateStarType(starIndex: number, game: Game): string {
     if (starIndex <= Math.floor(game.valoracion)) {
       return 'bi-star-fill';
@@ -72,13 +52,9 @@ export class GamesListComponent implements OnInit {
   formatPrice(price: number | undefined) {
     if (!price) return ;
     
-    return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+    return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
   }
 
-  /**
-   * Agrega un juego al carrito de compras.
-   * @param game Juego que se va a agregar al carrito.
-   */
   addToCart(game: Game): void {
     this.cartService.addToCart(game);
   }

@@ -7,7 +7,7 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api/users/users';
+  private apiUrl = 'http://localhost:8080/users';
   private currentUser: User | null = null;
 
   constructor(private http: HttpClient) {}
@@ -27,9 +27,6 @@ export class AuthService {
     );
   }
 
-  /**
-   * Cierra la sesión del usuario actual eliminando su información del almacenamiento local.
-   */
   logout(): void {
     this.currentUser = null;
     localStorage.removeItem('currentUser');
@@ -52,10 +49,6 @@ export class AuthService {
     );
   }
 
-  /**
-   * Obtiene el usuario actualmente autenticado.
-   * @returns Objeto con la información del usuario actualmente autenticado, o nulo si no hay usuario autenticado.
-   */
   getCurrentUser(): any {
     if (!this.currentUser) {
       const storedUser = localStorage.getItem('currentUser');
@@ -64,10 +57,6 @@ export class AuthService {
     return this.currentUser;
   }
 
-  /**
-   * Verifica si hay un usuario autenticado.
-   * @returns Verdadero si hay un usuario autenticado, falso de lo contrario.
-   */
   isLoggedIn(): boolean {
     return this.getCurrentUser() !== null;
   }
