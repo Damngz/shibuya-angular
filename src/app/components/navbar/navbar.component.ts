@@ -5,10 +5,6 @@ import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
-/**
- * @description
- * Componente de la barra de navegación.
- */
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -32,18 +28,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(private cartService: CartService, private authService: AuthService) {}
 
-  /**
-   * Inicializa el componente. Suscribe al contador de elementos en el carrito
-   * y obtiene la información del usuario actual.
-   */
   ngOnInit(): void {
     this.cartService.cartCount$.subscribe(count => {
       this.cartCount = count;
     });
     this.currentUser = this.authService.getCurrentUser();
-  }
-
-  isAdmin(): boolean {
-    return this.currentUser && this.currentUser.rol === 'admin';
   }
 }

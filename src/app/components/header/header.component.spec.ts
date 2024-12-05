@@ -1,48 +1,48 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
+import { Component } from '@angular/core';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let compiled: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ HeaderComponent ]
-    })
-    .compileComponents();
-  });
+      imports: [HeaderComponent], // Como es standalone, se importa directamente
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    compiled = fixture.nativeElement;
   });
 
-  it('should create', () => {
+  it('debería crear el componente', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render title and subtitle in HTML', () => {
-    const title = 'Test Title';
-    const subtitle = 'Test Subtitle';
+  it('debería mostrar el título y subtítulo pasados como @Input', () => {
+    const title = 'Título de Prueba';
+    const subtitle = 'Subtítulo de Prueba';
+
     component.title = title;
     component.subtitle = subtitle;
-    fixture.detectChanges();
+    fixture.detectChanges(); // Refresca la vista
 
-    const titleElement: HTMLElement = fixture.nativeElement.querySelector('h1');
-    const subtitleElement: HTMLElement = fixture.nativeElement.querySelector('p');
+    const titleElement = compiled.querySelector('h1');
+    const subtitleElement = compiled.querySelector('p');
 
-    expect(titleElement.textContent).toContain(title);
-    expect(subtitleElement.textContent).toContain(subtitle);
+    expect(titleElement?.textContent).toBe(title);
+    expect(subtitleElement?.textContent).toBe(subtitle);
   });
 
-  it('should render default values when inputs are not provided', () => {
+  it('debería tener valores por defecto para title y subtitle', () => {
     fixture.detectChanges();
 
-    const titleElement: HTMLElement = fixture.nativeElement.querySelector('h1');
-    const subtitleElement: HTMLElement = fixture.nativeElement.querySelector('p');
+    const titleElement = compiled.querySelector('h1');
+    const subtitleElement = compiled.querySelector('p');
 
-    expect(titleElement.textContent).toBe('');
-    expect(subtitleElement.textContent).toBe('');
+    expect(titleElement?.textContent).toBe('');
+    expect(subtitleElement?.textContent).toBe('');
   });
 });
