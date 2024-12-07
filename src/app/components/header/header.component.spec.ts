@@ -9,7 +9,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderComponent], // Como es standalone, se importa directamente
+      imports: [HeaderComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -27,7 +27,7 @@ describe('HeaderComponent', () => {
 
     component.title = title;
     component.subtitle = subtitle;
-    fixture.detectChanges(); // Refresca la vista
+    fixture.detectChanges();
 
     const titleElement = compiled.querySelector('h1');
     const subtitleElement = compiled.querySelector('p');

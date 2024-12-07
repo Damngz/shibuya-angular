@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { GameService } from '../../services/games.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-add-game',
   standalone: true,
-  imports: [NavbarComponent, HeaderComponent, FooterComponent, RouterLink, ReactiveFormsModule, CommonModule],
+  imports: [NavbarComponent, HeaderComponent, FooterComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './add-game.component.html',
   styleUrls: ['./add-game.component.css']
 })

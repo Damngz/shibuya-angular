@@ -7,6 +7,7 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  // private apiUrl = '/api/users/users';
   private apiUrl = 'http://localhost:8080/users';
   private currentUser: User | null = null;
 
