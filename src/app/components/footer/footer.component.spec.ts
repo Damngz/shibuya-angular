@@ -7,12 +7,12 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent], // Importamos el componente standalone
+      imports: [FooterComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges(); // Dispara la detección de cambios
+    fixture.detectChanges();
   });
 
   it('debería crearse el componente', () => {
